@@ -1,0 +1,171 @@
+﻿@model RSHA.Models.ViewModels.RequestsViewModel
+@using RSHA.Extensions
+@{
+    ViewData["Title"] = "Create Request";
+}
+
+<div class="bg-md-fixed">
+
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+        <h2 class="text-info">Create Request</h2> <br />
+
+
+        <form method="POST">
+            <div class="p-4 border rounded">
+                <input hidden value="@ViewBag.id" asp-for="Requests.MechanicAssigned" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.FirstName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.FirstName" value="@ViewBag.userProfileInfo[3]" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.LastName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.LastName" value="@ViewBag.userProfileInfo[4]" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.PhoneNumber"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.PhoneNumber" value="@ViewBag.userProfileInfo[2]" min="0" max="2000000000" class="form-control" />
+                        @*<input asp-for="Requests.PhoneNumber"  class="form-control" />*@
+                    </div>
+                    <span asp-validation-for="Requests.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Location"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.Location" placeholder="Need a tow truck?" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarModel"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarModel" value="@ViewBag.userProfileInfo[0]" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarLicensePlate"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarLicensePlate" value="@ViewBag.userProfileInfo[1]" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Problem type</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <select asp-for="@Model.Requests.ProblemId" asp-items="Model.ProblemTypes.ToSelectListItems(Model.Requests.ProblemId)" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Message"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        @*<input asp-for="Requests.Message" class="form-control" />*@
+                        <textarea asp-for="Requests.Message" class="form-control" style="height:8em;" /></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Mechanic</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <label readonly class="form-control">@ViewBag.mechName</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label></label>
+                    </div>
+                    <div class="">
+                        @*<input type="checkbox" id="ScheduleNow" class="form-control" />*@
+                        <button type=button id="ScheduleNow" class="btn btn-sub btn-sub-danger" >Set current Date/time</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule date</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledDate" value="" type="text" id="datepicker" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule time</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledTime" value="" type="text" id="timepicker" class="form-control timepicker" />
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-sub btn-sub-primary" value="Create" />
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-sub btn-sub-success">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />
+    </header>
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+
+        $("#ScheduleNow").click(function () {
+            console.log("clicked");
+
+            var currentDate = new Date();
+
+            var datee = currentDate.toLocaleDateString('en-GB');
+            var timee = currentDate.toLocaleTimeString('en-GB');
+
+            $("#datepicker").val(datee);
+            $("#timepicker").val(timee);
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            minTime: '0',
+            //minTime: "'" + minTimeValue + "'",
+            maxTime: '23:30',
+            defaultTime: 'now',
+            startTime: '0',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +0, maxDate: "+3m", dateFormat: "dd-mm-yy", showAnim: "fadeIn"
+            });
+        });
+
+    </script>
+}

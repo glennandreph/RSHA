@@ -1,0 +1,101 @@
+﻿@model IEnumerable<RSHA.Models.Mechanics>
+@{
+    ViewData["Title"] = "Locate Mechanic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="bg-md-fixed">
+    <br />  <br />
+    <div class="container bg-table border border-dark">
+        <form method="GET">
+            <br /> <br />
+            <h2 class="text-info">Mechanic Search</h2> <br />
+
+            <div style=" background-color:aliceblue" class="container border rounded border-dark text-normal">
+                <div class="col-12" style="padding-bottom:20px;">
+                    <div class="row" style="padding-top:20px;">
+                        <div class="col-sm-2">
+                            Mechanic Name
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="col-sm-2">
+                            State
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.Editor("searchState", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top:10px;">
+                        <div class="col-sm-2">
+                            City
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.Editor("searchCity", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="col-sm-2">
+                            Postal Code
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.Editor("searchPostalCode", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top:10px;">
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" name="submit" value="Search" class="btn btn-sub btn-sub-primary form-control">
+                                <i class="fas fa-search"></i>&nbsp;&nbsp;Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />  <br />
+            <h2 class="text-success">Mechanic Found</h2> <br />
+            <div>
+                <table class="tableme">
+                    <tr class="thead">
+                        <th>@Html.DisplayNameFor(m => m.Name)</th>
+                        <th class="resp-mobile resp-tablet">@Html.DisplayNameFor(m => m.State)</th>
+                        <th class="resp-mobile resp-tablet">@Html.DisplayNameFor(m => m.City)</th>
+                        <th class="resp-mobile resp-tablet">@Html.DisplayNameFor(m => m.PostalCode)</th>
+                        <th class="resp-mobile">@Html.DisplayNameFor(m => m.Street)</th>
+                        <th>    </th>
+                        <th>    </th>
+                        <th>    </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="tbody">
+                            <td>@Html.DisplayFor(m => item.Name)</td>
+                            <td class="resp-mobile resp-tablet">@Html.DisplayFor(m => item.State)</td>
+                            <td class="resp-mobile resp-tablet">@Html.DisplayFor(m => item.City)</td>
+                            <td class="resp-mobile resp-tablet">@Html.DisplayFor(m => item.PostalCode)</td>
+                            <td class="resp-mobile">@Html.DisplayFor(m => item.Street)</td>
+                            <td>    </td>
+                            <td><partial name="_SendRequestToButtonPartial" model="item.Id" /></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />
+    </header>
+@section Scripts{
+
+}

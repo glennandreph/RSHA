@@ -1,0 +1,249 @@
+﻿@model RSHA.Models.ViewModels.RequestsViewModel
+@using RSHA.Extensions
+@{
+    ViewData["Title"] = "Edit Request";
+}
+
+<div class="bg-md-fixed">
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+        <h2 class="text-info">Edit Request</h2>
+
+
+        <form method="POST">
+            <div class="p-4 border rounded">
+                <input hidden asp-for="Requests.Id" />
+                <input hidden asp-for="Requests.MechanicAssigned" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.FirstName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.FirstName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.LastName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.LastName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.PhoneNumber"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.PhoneNumber" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Location"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.Location" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Requests.Location" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarModel"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarModel" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarLicensePlate"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarLicensePlate" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Problem type</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <select asp-for="@Model.Requests.ProblemId" asp-items="Model.ProblemTypes.ToSelectListItems(Model.Requests.ProblemId)" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Message"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.Message" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label></label>
+                    </div>
+                    <div class="">
+                        @*<input type="checkbox" id="ScheduleNow" class="form-control" />*@
+                        <button type=button id="ScheduleNow" class="btn btn-sub btn-sub-danger">Set current Date/time</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule date</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledDate" type="text" id="datepicker" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule time</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledTime" type="text" id="timepicker" class="form-control timepicker" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Mechanic</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <label readonly class="form-control">@ViewBag.mechName</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Completed"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input type="checkbox" asp-for="Requests.Completed" disabled class="form-control" />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-sub btn-sub-primary" value="Update" />
+                    <a asp-action="Index" class="btn btn-sub btn-sub-success">Back to overview</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />
+</header>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+                /**
+        var valueInDatepicker = null;
+        var dateChanged = document.querySelector('#datepicker');
+
+        dateChanged.addEventListener('change', (event) => {
+            var valueInDatepicker = document.querySelector('#datepicker');
+            valueInDatepicker.textContent = `${event.target.value}`;
+        });
+
+        var currentDate = new Date();
+        var currentHours = currentDate.getHours();
+
+        var currentDateFormatted = (currentDate.getDate() + "-" + currentDate.getMonth() + "-" + currentDate.getFullYear());
+        if (currentDateFormatted = valueInDatepicker) {
+            minTimeValue = currentHours;
+        }
+        else {
+            minTimeValue = 0;
+        }
+
+            $("#ScheduleNow").change(function () {
+            //    if (this.checked) {
+            if ($("#ScheduleNow").prop("checked", true)) {
+
+                var currentDate = new Date();
+
+                var datee = currentDate.toLocaleDateString('en-GB');
+                var timee = currentDate.toLocaleTimeString('en-GB');
+
+                //var currentYear = currentDate.getFullYear();
+                //var currentMonth = currentDate.getMonth();
+                //var currentDay = currentDate.getDate();
+                //var insertDate = currentDay + "-" + currentMonth + "-" + currentYear;
+                $("#datepicker").val(datee);
+
+                //var currentHours = currentDate.getHours();
+                //var currentMinutes = currentDate.getMinutes();
+                //$("#timepicker").val(currentHours + ":" + currentMinutes);
+                $("#timepicker").val(timee);
+
+
+            }
+        });
+        */
+
+        $("#ScheduleNow").click(function () {
+            console.log("clicked");
+
+            var currentDate = new Date();
+
+            var datee = currentDate.toLocaleDateString('en-GB');
+            var timee = currentDate.toLocaleTimeString('en-GB');
+
+            //var currentYear = currentDate.getFullYear();
+            //var currentMonth = currentDate.getMonth();
+            //var currentDay = currentDate.getDate();
+            //var insertDate = currentDay + "-" + currentMonth + "-" + currentYear;
+            $("#datepicker").val(datee);
+
+            //var currentHours = currentDate.getHours();
+            //var currentMinutes = currentDate.getMinutes();
+            //$("#timepicker").val(currentHours + ":" + currentMinutes);
+            $("#timepicker").val(timee);
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 30,
+            minTime: '0',
+            maxTime: '23:30',
+            //defaultTime: 'now',
+            startTime: '0',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +0, maxDate: "+3m", dateFormat: "dd-mm-yy", showAnim: "fadeIn"
+            });
+        });
+
+        $(document).ready(function () {
+            var appointmentTime = document.getElementById('datepicker').value;
+            var splitData = "";
+
+            if (appointmentTime.indexOf(" ") > 0) {
+                splitData = appointmentTime.split(" ");
+            }
+            else {
+                splitData = appointmentTime.split("T");
+            }
+
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+
+            }
+
+            $('#datepicker').attr('value', splitData[0]);
+            $('#timepicker').attr('value', time);
+        });
+    </script>
+}
