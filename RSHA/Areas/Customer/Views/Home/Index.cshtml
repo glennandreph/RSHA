@@ -1,0 +1,212 @@
+﻿@using RSHA.Utilities;
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="redWorld"><pre> </pre></div>
+<div class="section-0 container-fluid text-center">
+    <div class="row">
+        <div class="col-md-7 col-sm-12 fallinto">
+            <h6>The best service you can find</h6>
+            <h1>Roadside Help Assistance</h1>
+            <p>
+                Use this web-application to find and set an appointment to your local mechanic workshop.
+            </p>
+            @if (User.IsInRole(StaticDetails.MechanicEndUser))
+            {
+                <a class="button btn btn-outline-danger px-5 py-2" asp-area="Mechanic" asp-controller="ReceivedRequests" asp-action="Index">Start</a>
+            }
+            else if (!User.IsInRole(StaticDetails.MechanicEndUser) && User.Identity.IsAuthenticated)
+            {
+                <a class="button btn btn-outline-danger px-5 py-2" asp-area="Customer" asp-controller="Requests" asp-action="Locate">Start</a>
+            }
+            else
+            {
+                <a class="button btn btn-outline-danger px-5 py-2" href="/Identity/Account/Login">Start</a>
+            }
+        </div>
+        <div class="col-md-5 col-sm-12 h-25">
+
+            <!-- SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG -->
+
+            <div class="pushdownsvg"></div>
+            <div id="svgLogo">
+                <svg id="Logo-Defs" class="size" version="1.2" baseProfile="tiny"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <linearGradient id="MyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="5%" stop-color="#F7D696" />
+                            <stop offset="50%" stop-color="#EEBE7B" />
+                            <stop offset="95%" stop-color="#CEA058" />
+                        </linearGradient>
+
+                        <g id="Logo-Group" filter="url(#filter0_d)">
+                            <path id="octo-outside"
+                                  d="M465.5 134L236 3L2.5 134V403.5L236 538.5L465.5 403.5V134Z" />
+
+                            <path id="octo-inside"
+                                  d="M436 148.5L236 33L32 148.5V385L236 503.5L436 385V148.5Z" />
+                        </g>
+                        <path id="v-outside" d="M236 1105L446.5 415L236 538.5L22 415L236 1105Z" />
+
+                        <path id="v-inside" d="M236 1022L406 470L236 576L66 470L236 1022Z" />
+
+
+
+
+
+
+                        <g id="Mech">
+                            <path id="#" class="#"
+                                  d="M234.275 280.821C251.992 280.821 293.646 259.499 293.646 208.41C293.646 201.283 293.473 194.399 292.885 187.895C291.921 175.094 289.299 163.75 282.772 155.055C274.398 143.224 259.749 136 234.275 136C208.806 136 194.158 143.221 185.784 155.049C179.252 163.745 176.629 175.093 175.665 187.898C175.079 194.401 174.905 201.285 174.905 208.41C174.905 259.499 216.559 280.821 234.275 280.821ZM253.655 162.528C251.926 166.898 251.059 169.083 249.329 173.453C238.16 170.297 230.389 170.297 219.22 173.453C217.491 169.083 216.624 166.898 214.894 162.528C228.862 158.299 239.688 158.3 253.655 162.528ZM183.737 197.332C184.421 198.828 187.327 204.581 191.825 205.12C196.996 205.74 205.578 186.808 234.275 186.762C262.972 186.808 271.555 205.74 276.726 205.12C281.224 204.58 284.13 198.828 284.814 197.332C284.953 200.998 285.004 204.71 285.004 208.41C285.004 233.382 273.978 248.856 264.727 257.438C253.072 268.253 240.131 272.178 234.276 272.178C228.422 272.178 215.481 268.253 203.826 257.438C194.574 248.856 183.548 233.382 183.548 208.41C183.547 204.71 183.598 200.998 183.737 197.332Z"
+                                  fill="white" />
+
+                            <path d="M344.498 355.082C341.467 336.235 335.228 311.957 322.711 303.33C314.163 297.436 284.342 281.503 271.607 274.7L271.392 274.586C269.936 273.808 268.158 273.964 266.862 274.983C260.191 280.22 252.884 283.749 245.143 285.473C243.776 285.777 242.653 286.749 242.157 288.058L234.275 308.834L226.393 288.058C225.897 286.749 224.775 285.777 223.407 285.473C215.667 283.749 208.36 280.22 201.69 274.983C200.39 273.964 198.614 273.808 197.158 274.586C184.575 281.31 154.389 297.567 145.878 303.305C131.469 313.011 125.169 348.139 124.052 355.083C123.942 355.772 124.006 356.476 124.238 357.134C124.544 357.996 129.309 370.339 153.141 380.264C154.515 378.532 156.345 377.219 158.403 376.48C155.846 375.572 153.627 373.793 152.207 371.405C150.092 367.846 150.014 363.38 151.997 359.759C158.107 348.575 169.809 341.616 182.55 341.599C194.401 341.599 205.144 347.488 211.524 357.06H257C258.249 355.195 259.681 353.451 261.288 351.839C267.86 345.247 276.604 341.611 285.91 341.598H285.918H285.925C298.656 341.598 310.372 348.518 316.503 359.665C318.491 363.282 318.424 367.739 316.321 371.309C314.91 373.698 312.696 375.484 310.142 376.399C312.237 377.141 314.095 378.474 315.48 380.236C339.251 370.317 344.008 357.996 344.314 357.135C344.545 356.475 344.609 355.77 344.498 355.082Z"
+                                  fill="white" />
+
+                            <path d="M306.233 386.004H306.23L284.32 386.034C283.931 385.112 283.185 382.55 283.178 376.44C283.167 370.328 283.905 367.762 284.293 366.838L306.197 366.806C306.721 366.803 307.204 366.527 307.469 366.077C307.736 365.625 307.743 365.07 307.492 364.612C303.17 356.756 294.923 351.877 285.924 351.877C279.363 351.886 273.201 354.451 268.569 359.096C266.182 361.489 264.361 364.291 263.147 367.339H205.376C201.749 358.296 192.897 351.879 182.55 351.879C173.578 351.891 165.328 356.798 161.02 364.687C160.769 365.145 160.779 365.703 161.046 366.151C161.312 366.6 161.795 366.874 162.318 366.874H162.319L184.23 366.839C184.62 367.762 185.364 370.323 185.372 376.436C185.382 382.548 184.645 385.113 184.257 386.036L162.352 386.069C161.83 386.07 161.347 386.347 161.08 386.796C160.815 387.246 160.806 387.803 161.059 388.262C165.379 396.117 173.629 401 182.589 401H182.625C189.187 400.99 195.349 398.425 199.982 393.779C202.369 391.385 204.189 388.582 205.402 385.533H263.172C266.8 394.58 275.645 400.996 285.966 400.998C285.966 400.998 285.999 400.998 286.001 400.998C294.971 400.985 303.222 396.075 307.531 388.192C307.782 387.733 307.772 387.175 307.505 386.727C307.239 386.278 306.755 386.004 306.233 386.004Z"
+                                  fill="white" />
+
+                        </g>
+                    </defs>
+                </svg>
+
+                <svg id="Logo" class="Animate-Path" width="502" height="1176" viewBox="0 0 502 1176"
+                     xml:space="preserve">
+
+                <use id="Draw-Octo" class="Animate-Octo-Inside" xlink:href="#octo-outside" />
+
+
+
+
+
+
+
+                <use id="Draw-Octo" class="Animate-Octo-Outside" xlink:href="#octo-inside" />
+
+
+
+
+
+
+
+                <use id="Draw-V" class="Animate-v-outside" xlink:href="#v-outside" />
+
+
+
+
+
+
+
+                <use id="Draw-V" class="Animate-v-inside" xlink:href="#v-inside" />
+
+
+
+
+
+
+
+                <use id="Draw-Mech" class="Animate-Mech" xlink:href="#Mech" />
+
+
+
+
+
+
+
+
+
+
+                
+
+
+                            <!--<use class="Animate-Fill" xlink:href="#Logo-Group" /> -->
+                        </svg>
+            </div>
+            
+            <!-- SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG SVG -->
+
+        </div>
+    </div>
+</div>
+
+    </header>
+
+<main>
+    @*<section class="section-1">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tiger">
+                        <img src="~/images/tiger.jpg" alt="*Bilde*">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel text-left">
+                        <h1>This is tiger</h1>
+                        <p class="pt-4">
+                            My name is Tigergutt. Growl !!
+                        </p>
+                        <p>
+                            My entity is animal. Cool. Lots of words right after each other makes a small paragraph,
+                            so
+                            we can see how it all will look, k? <br>
+                            Some more words after a br.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+    <section class="section-4">
+        <div class="team row">
+            <div class="col-md-4 col-12 text-center">
+                <div class="card mr-2 d-inline-block shadow-lg">
+                    <div class="card-img-top">
+                        <img src="~/images/google.jpg" alt="profile bilde" class="img-fluid">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Find nearby mechanics</h3>
+                        <p class="card-text">
+                            Our app is integrated with google maps, making the search for an mechanic incredible
+                            simple !
+                        </p>
+                        <a asp-area="Customer" asp-controller="Requests" asp-action="Locate" class="text-primary text-decoration-none">Try a search!</a>
+                        @*<p class="text-black-50">...</p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12 text-center">
+                <div class="card mr-2 d-inline-block shadow-lg">
+                    <div class="card-img-top">
+                        <img src="~/images/Repair.png" alt="profile bilde" class="img-fluid repair">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Make appointments</h3>
+                        <p class="card-text">
+                            All in one app where you can be in conversation with several mechanics and appointments at once.
+                        </p>
+                        <a asp-area="Customer" asp-controller="Requests" asp-action="Index" class="text-primary text-decoration-none">View Request</a>
+                        @*<p class="text-black-50">...</p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12 text-center">
+                <div class="card mr-2 d-inline-block shadow-lg">
+                    <div class="card-img-top">
+                        <img src="~/images/user-profile.png" alt="profile bilde" class="img-fluid repair">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Profile</h3>
+                        <p class="card-text">
+                            Register to use and keep track of all your appointment history. Make one now and be set to go.
+                        </p>
+                        <a href="/Identity/Account/Register" class="text-primary text-decoration-none">Register</a>
+                        @*<p class="text-black-50">...</p>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
