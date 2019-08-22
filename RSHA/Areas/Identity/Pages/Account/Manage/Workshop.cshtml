@@ -1,0 +1,50 @@
+﻿@page
+@model WorkshopModel
+@{
+    ViewData["Title"] = "Workshop";
+}
+@{
+    Layout = "/Views/Shared/_LayoutAccountManage.cshtml";
+}
+<div class="bg-md-fixed">
+
+    <h4 class="text-normal text-white">@ViewData["Title"]</h4>
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+    <div class="row text-normal text-white">
+        <div class="col-md-6">
+            <form id="profile-form" method="post">
+                <div class="form-group">
+                    <label asp-for="Mechanic.Name"></label>
+                    <input asp-for="Mechanic.Name" class="form-control" />
+                    <span asp-validation-for="Mechanic.Name" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mechanic.Street"></label>
+                    <input asp-for="Mechanic.Street" class="form-control" />
+                    <span asp-validation-for="Mechanic.Street" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mechanic.City"></label>
+                    <input asp-for="Mechanic.City" class="form-control" />
+                    <span asp-validation-for="Mechanic.City" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mechanic.PostalCode"></label>
+                    <input asp-for="Mechanic.PostalCode" class="form-control" />
+                    <span asp-validation-for="Mechanic.PostalCode" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mechanic.State"></label>
+                    <input asp-for="Mechanic.State" class="form-control" />
+                    <span asp-validation-for="Mechanic.State" class="text-alertme"></span>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <button type="submit" class="btn btn-sub btn-sub-primary btn-sub-bg">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
