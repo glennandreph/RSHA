@@ -1,0 +1,254 @@
+﻿@model IEnumerable<RSHA.Models.Requests>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="bg-fixed">
+
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-info">Incoming Request Overview</h2>
+            </div>
+            <div class="col-6 text-right">
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            <table class="tableme">
+                <tr class="thead">
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.RequestCreated)
+                    </th>
+                    <th>
+                        Scheduled date
+                    </th>
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.ProblemTypes)
+                    </th>
+                    <th class="resp-mobile  resp-tablet resp-biglet">
+                        @Html.DisplayNameFor(m => m.Location)
+                    </th>
+                    <th class="resp-mobile resp-tablet">
+                        @Html.DisplayNameFor(m => m.LastName)
+                    </th>
+                    <th class="resp-mobile  resp-tablet">
+                        @Html.DisplayNameFor(m => m.Completed)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Where(m => m.Completed == false).Where(m => m.AcceptedByMechanic == false))
+                {
+                    <tr class="tbody bg-infome">
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.RequestCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.RequestScheduledDate)
+                        </td>
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.ProblemTypes.Name)
+                        </td>
+                        <td class="resp-mobile  resp-tablet resp-biglet">
+                            @Html.DisplayFor(m => item.Location)
+                        </td>
+                        <td class="resp-mobile resp-tablet">
+                            @Html.DisplayFor(m => item.LastName)
+                        </td>
+                        <td class="resp-mobile  resp-tablet">
+                            @Html.DisplayFor(m => item.Completed)
+                        </td>
+                        <td>
+                            <partial name="_TableButtonAcceptRequestPartial" model="item.Id" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <br />  <br />
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-success">Active Request</h2>
+            </div>
+            <div class="col-6 text-right">
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            <table class="tableme">
+                <tr class="thead">
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.RequestCreated)
+                    </th>
+                    <th>
+                        Scheduled date
+                    </th>
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.ProblemTypes)
+                    </th>
+                    <th class="resp-mobile  resp-tablet resp-biglet">
+                        @Html.DisplayNameFor(m => m.Location)
+                    </th>
+                    <th class="resp-mobile resp-tablet">
+                        @Html.DisplayNameFor(m => m.LastName)
+                    </th>
+                    <th class="resp-mobile  resp-tablet">
+                        @Html.DisplayNameFor(m => m.Completed)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Where(m => m.Completed == false).Where(m => m.AcceptedByMechanic == true))
+                {
+                    <tr class="tbody bg-successme">
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.RequestCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.RequestScheduledDate)
+                        </td>
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.ProblemTypes.Name)
+                        </td>
+                        <td class="resp-mobile  resp-tablet resp-biglet">
+                            @Html.DisplayFor(m => item.Location)
+                        </td>
+                        <td class="resp-mobile resp-tablet">
+                            @Html.DisplayFor(m => item.LastName)
+                        </td>
+                        <td class="resp-mobile  resp-tablet">
+                            @Html.DisplayFor(m => item.Completed)
+                        </td>
+                        <td>
+                            <partial name="_TableButtonAcceptRequestPartialActive" model="item.Id" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <br />  <br />
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-secondary">Past Request</h2>
+            </div>
+            <div class="col-6 text-right">
+            </div>
+        </div>
+
+        <br />
+
+        <div>
+            <table class="tableme">
+                <tr class="thead">
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.RequestCreated)
+                    </th>
+                    <th>
+                        Scheduled date
+                    </th>
+                    <th class="resp-mobile">
+                        @Html.DisplayNameFor(m => m.ProblemTypes)
+                    </th>
+                    <th class="resp-mobile  resp-tablet resp-biglet">
+                        @Html.DisplayNameFor(m => m.Location)
+                    </th>
+                    <th class="resp-mobile resp-tablet">
+                        @Html.DisplayNameFor(m => m.LastName)
+                    </th>
+                    <th class="resp-mobile  resp-tablet">
+                        @Html.DisplayNameFor(m => m.Completed)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Where(m => m.Completed == true))
+                {
+                    <tr class="tbody bg-darkme">
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.RequestCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.RequestScheduledDate)
+                        </td>
+                        <td class="resp-mobile">
+                            @Html.DisplayFor(m => item.ProblemTypes.Name)
+                        </td>
+                        <td class="resp-mobile  resp-tablet resp-biglet">
+                            @Html.DisplayFor(m => item.Location)
+                        </td>
+                        <td class="resp-mobile resp-tablet">
+                            @Html.DisplayFor(m => item.LastName)
+                        </td>
+                        <td class="resp-mobile  resp-tablet">
+                            @Html.DisplayFor(m => item.Completed)
+                        </td>
+                        <td>
+                            <partial name="_TableButtonAcceptRequestPartialHistory" model="item.Id" />
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+</header>
+<script>
+    
+    function accept() {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": 'toast-top-right',
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "1200",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        new toastr.success('The request was accepted', 'Accepted')
+    }
+
+    function del() {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": 'toast-top-right',
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "1200",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        new toastr.warning('The request was NOT accepted', 'Deleted')
+    }
+    
+</script>

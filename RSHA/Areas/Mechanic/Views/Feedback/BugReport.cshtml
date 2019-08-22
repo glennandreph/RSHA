@@ -1,0 +1,44 @@
+﻿@model RSHA.Models.BugRapports
+@{
+    ViewData["Title"] = "BugReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-fixed">
+
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+        <h2 class="text-info">Bug Reporting</h2> <br />
+
+        <br />
+        <div class="">
+
+            <form method="POST">
+                <div class="p-4 border rounded">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="">
+                            <h4>Report a bug</h4>
+                        </div>
+                        <div class="">
+                            @*<input asp-for="Feedback.Message" class="form-control" />*@
+                            <textarea asp-for="Message" class="form-control" style="height:8em;" /></textarea>
+                        </div>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-sub btn-sub-primary" value="Send" />
+                    <a asp-controller="../" asp-action="Index" class="btn btn-sub btn-sub-success">Back</a>
+                </div>
+            </form>
+            <br /><br />
+        </div>
+    </div>
+</div>
+<br /><br />
+
+</header>

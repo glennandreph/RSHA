@@ -1,0 +1,75 @@
+﻿@*@model IEnumerable<RSHA.Models.Feedbacks>*@
+@*@{IEnumerable<RSHA.Models.Feedbacks> modelEnum = new List<RSHA.Models.Feedbacks> { Model };}*@
+@model RSHA.Models.ViewModels.FeedbacksViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="bg-fixed">
+
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+        <h2 class="text-info">Feedback Overview & Submission</h2> <br />
+
+        <br />
+        <div class="">
+
+            <form method="POST">
+                <div class="p-4 border rounded">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="">
+                            <h4>Send feedback to administrator</h4>
+                        </div>
+                        <div class="">
+                            @*<input asp-for="Feedback.Message" class="form-control" />*@
+                            <textarea asp-for="Feedback.Message" class="form-control" style="height:8em;" /></textarea>
+                        </div>
+                        <span asp-validation-for="Feedback.Message" class="text-danger"></span>
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-sub btn-sub-primary" value="Send" />
+                    <a asp-controller="../" asp-action="Index" class="btn btn-sub btn-sub-success">Back</a>
+                </div>
+            </form>
+            <br /><br />
+        </div>
+        <div class="col-12">
+            <table class="tableme" style="width: 97% ;">
+                <tr class="thead">
+                    <th class="col-4">
+                        @*@Html.DisplayNameFor(m => m.FeedbackCreated)*@
+                        Message time
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Feedback.Message)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Feedbacks)
+                {
+                    <tr class="tbody @{if (item.SenderName == User.Identity.Name)
+                            { <text>bg-darkme</text> }
+                                else {<text>bg-successme </text>} } ">
+                        <td>
+                            @Html.DisplayFor(m => item.FeedbackCreated)
+                        </td>
+                        <td class="word-break">
+                            @Html.DisplayFor(m => item.Message)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+    </div>
+</div>
+<br /><br />
+
+</header>

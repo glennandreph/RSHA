@@ -1,0 +1,161 @@
+﻿@model RSHA.Models.ViewModels.RequestsViewModel
+@{
+    ViewData["Title"] = "Accept Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="bg-md-fixed">
+
+    <br /><br />
+    <div class="container bg-table border border-dark text-normal">
+        <br /><br />
+        <h2 class="text-info">Accept Request</h2>
+
+
+        <form method="POST">
+            <div class="p-4 border rounded">
+                <input hidden asp-for="Requests.Id" />
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.FirstName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.FirstName" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.LastName"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.LastName" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.PhoneNumber"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.PhoneNumber" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Location"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.Location" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarModel"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarModel" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.CarLicensePlate"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.CarLicensePlate" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Problem type</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.ProblemTypes.Name" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Message"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.Message" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule date</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledDate" type="text" id="datepicker" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label>Schedule time</label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.RequestScheduledTime" type="text" id="timepicker" readonly class="form-control timepicker" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.MechanicAssigned"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input asp-for="Requests.MechanicAssigned" readonly class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.Completed"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input type="checkbox" asp-for="Requests.Completed" disabled class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 col-3">
+                        <label asp-for="Requests.AcceptedByMechanic"></label>
+                    </div>
+                    <div class="col-sm-10 col-9">
+                        <input type="checkbox" asp-for="Requests.AcceptedByMechanic" required class="form-control" />
+                    </div>
+                    @*<span asp-validation-for="Requests.AcceptedByMechanic" class="text-danger"></span>*@
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" class="btn btn-sub btn-sub-primary" value="Accept" />
+                    <a asp-action="Index" class="btn btn-sub btn-sub-success">Back to overview</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />
+</header>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            var appointmentTime = document.getElementById('datepicker').value;
+            var splitData = "";
+
+            if (appointmentTime.indexOf(" ") > 0) {
+                splitData = appointmentTime.split(" ");
+            }
+            else {
+                splitData = appointmentTime.split("T");
+            }
+
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+
+            }
+
+            $('#datepicker').attr('value', splitData[0]);
+            $('#timepicker').attr('value', time);
+        });
+    </script>
+}
