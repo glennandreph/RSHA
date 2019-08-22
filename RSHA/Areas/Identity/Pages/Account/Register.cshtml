@@ -1,0 +1,62 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<br /><br />
+<h2 class="text-book text-white">@ViewData["Title"]</h2>
+
+<div class="bg-md-fixed text-normal text-white">
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div class="form-group">
+                    <label asp-for="Input.FirstName"></label>
+                    <input asp-for="Input.FirstName" class="form-control" />
+                    <span asp-validation-for="Input.FirstName" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.LastName"></label>
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <span asp-validation-for="Input.LastName" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.PhoneNumber"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-alertme"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-alertme"></span>
+                </div>
+                <div class="form-group alert alert-secondary" style="height:50px; width:160px; padding-right:10px;">
+                    <label asp-for="Input.IsMechanic"></label>
+                    <input asp-for="Input.IsMechanic" type="checkbox" class="" style="margin-left:10px;" />
+                </div>
+                <p class="text-dark">Note: Users registering as Mechanics will be sent back to start/Home and must wait to be approved by admin before account can be used.</p>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <button type="submit" class="btn btn-sub btn-sub-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+</header>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
