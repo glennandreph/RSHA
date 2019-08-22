@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-RSHA-31795551-801B-48C6-9246-8AA4C3FC6723</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20190410123411_updatedUserAndRequestWithRequiredAnnotations.cs" />
+    <Compile Remove="Data\Migrations\20190410123411_updatedUserAndRequestWithRequiredAnnotations.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190410152730_addMechanicsModel.cs" />
+    <Compile Remove="Data\Migrations\20190410152730_addMechanicsModel.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190410211405_changedRequestForeignKeyToApplicationUserId.cs" />
+    <Compile Remove="Data\Migrations\20190410211405_changedRequestForeignKeyToApplicationUserId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190509213052_addedLatitudeAndLongitudeToMechanics.cs" />
+    <Compile Remove="Data\Migrations\20190509213052_addedLatitudeAndLongitudeToMechanics.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190525003652_FeedbackModelAdded.cs" />
+    <Compile Remove="Data\Migrations\20190525003652_FeedbackModelAdded.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="toastr" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Customer\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Customer\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Mechanic\Views\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Mechanic\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
