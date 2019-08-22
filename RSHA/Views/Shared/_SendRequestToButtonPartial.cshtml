@@ -1,0 +1,15 @@
+﻿@model int
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<td style="width:250px;">
+    <div class="btn-group" role="group">
+        <button class="btn btn-sub btn-sub-primary text-white" style="font-size:1em;"  asp-action="Create" asp-route-id="@Model">
+            <i class="fas fa-wrench"></i>&nbsp;&nbsp;Request mechanic
+        </button>
+        @*<a type="button" class="btn btn-primary" href="@Url.Action("Create/"+Model)">
+            <i class="fas fa-wrench"></i>&nbsp;&nbsp;Request mechanic
+        </a>*@
+    </div>
+</td>

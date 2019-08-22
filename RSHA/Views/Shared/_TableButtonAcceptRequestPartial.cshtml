@@ -1,0 +1,26 @@
+﻿@model int
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<td style="width:150px;">
+    <div class="btn-group" role="group">
+        <a class="btn btn-success" asp-controller="ReceivedRequests" asp-action="Accept" asp-route-id="@Model">
+            <i class="fas fa-check"></i>
+        </a>
+        @*<button class="btn btn-secondary" asp-area="Customer" asp-controller="Requests" asp-action="Details" asp-route-id="@Model">
+                <i class="far fa-list-alt"></i>
+            </button>*@
+        <a class="btn btn-info" asp-area="Customer" asp-controller="Requests" asp-action="Details" asp-route-id="@Model">
+            <i class="fas fa-list-alt"></i>
+        </a>
+        <form asp-action="Delete/@Model" asp-controller="ReceivedRequests" method="post">
+            <input type="hidden" value="@Model" asp-route-id="@Model" />
+            <button type="submit" class="btn btn-danger" style="border-radius: 0px 5px 5px 0px;"><i class="fas fa-trash-alt"></i></button>
+        </form>
+    </div>
+</td>
+
+@*<a class="btn btn-danger" asp-controller="ReceivedRequests" asp-action="Delete" asp-route-id="@Model">
+        <i class="fas fa-trash-alt"></i>
+    </a>*@

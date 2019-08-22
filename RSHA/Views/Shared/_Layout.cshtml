@@ -1,0 +1,135 @@
+﻿@using RSHA.Utilities;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RSHA</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="~/lib/jquery-timepicker/jquery.timepicker.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/jquery-timepicker/jquery.timepicker.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
+              asp-fallback-href="~/lib/fontawesome/css/all.css"
+              integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y"
+              crossorigin="anonymous" />
+    </environment>
+</head>
+<body>
+    <header>
+        <div class="container-fluid p">
+            <div class="nav-wrapper">
+                <nav id="navbar" class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" asp-controller="../" asp-action="Index">
+                        RSHA
+                        <img class="icon" src="~/images/automobile-with-wrench.svg" alt="Icon Logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <img class="hamburger" src="~/images/menu-circular-button.svg" alt="hamburger menu">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <div class="mr-auto"></div>
+                        <ul class="navbar-nav">
+                            @if (!User.IsInRole(StaticDetails.MechanicEndUser) && User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-area="Customer" asp-controller="Requests" asp-action="Index">Requests overview</a></li>
+                                <li class="nav-item dropdown">
+                                    <div class="dropdown">
+                                        <a class="nav-link" asp-area="Customer" asp-controller="Requests" asp-action="Locate">Find Mechanic</a>
+                                        <div class="dropdown-content">
+                                            <a class="nav-link" asp-area="Customer" asp-controller="Requests" asp-action="Locate">By List</a>
+                                            <a class="nav-link" asp-area="Customer" asp-controller="Requests" asp-action="Gmap">By Map</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                            @if (User.IsInRole(StaticDetails.MechanicEndUser))
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-area="Mechanic" asp-controller="ReceivedRequests" asp-action="Index">Incoming requests</a></li>
+                                <li class="nav-item"><a class="nav-link" asp-area="Mechanic" asp-controller="Feedback" asp-action="Index">Feedback</a></li>
+                                <li class="nav-item"><a class="nav-link" asp-area="Mechanic" asp-controller="Feedback" asp-action="BugReport">Bug Reports</a></li>
+                            }
+                        </ul>
+                        <div class="login-sm">
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </div>
+                    <div class="login">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="pushdown"></div>
+
+        @*<partial name="_CookieConsentPartial" />*@
+
+        <div class="container body-content">
+
+            @RenderBody()
+            <hr />
+            <footer>
+                <partial name="_FooterPartial" />
+            </footer>
+        </div>
+    </header>
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-timepicker/jquery.timepicker.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous">
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-timepicker/jquery.timepicker.js" asp-append-version="true"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" asp-append-version="true" type="text/javascript"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
